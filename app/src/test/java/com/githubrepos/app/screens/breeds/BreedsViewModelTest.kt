@@ -4,10 +4,10 @@ import app.cash.turbine.test
 import arrow.core.right
 import com.githubrepos.app.navigation.AppNavigator
 import com.githubrepos.app.testcommons.CoroutinesTestRule
-import com.githubrepos.app.testcommons.sampleBreed
+import com.githubrepos.app.testcommons.sampleRepo
 import com.githubrepos.domain.Empty
-import com.githubrepos.usecases.GetAllBreedsUseCase
-import com.githubrepos.usecases.LoadAllBreedsUseCase
+import com.githubrepos.usecases.GetAllReposUseCase
+import com.githubrepos.usecases.LoadAllReposUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runCurrent
@@ -30,30 +30,30 @@ class BreedsViewModelTest {
     val coroutinesTestRule = CoroutinesTestRule()
 
     @Mock
-    lateinit var getAllBreedsUseCase: GetAllBreedsUseCase
+    lateinit var getAllReposUseCase: GetAllReposUseCase
 
     @Mock
-    lateinit var loadAllBreedsUseCase: LoadAllBreedsUseCase
+    lateinit var loadAllReposUseCase: LoadAllReposUseCase
 
     @Mock
     lateinit var appNavigator: AppNavigator
 
     private lateinit var vm: BreedsViewModel
 
-    private val breeds = listOf(sampleBreed)
+    private val breeds = listOf(sampleRepo)
 
     @Before
     fun setUp() {
-        whenever(getAllBreedsUseCase()).thenReturn(flowOf(breeds))
-        whenever(loadAllBreedsUseCase()).thenReturn(flowOf(Empty().right()))
-        vm = BreedsViewModel(getAllBreedsUseCase, loadAllBreedsUseCase, appNavigator)
+        whenever(getAllReposUseCase()).thenReturn(flowOf(breeds))
+        whenever(loadAllReposUseCase()).thenReturn(flowOf(Empty().right()))
+        vm = BreedsViewModel(getAllReposUseCase, loadAllReposUseCase, appNavigator)
         vm.onStarted()
     }
 
     @Test
     fun `Breeds are loaded from cache when viewmodel starts`() = runTest {
         runCurrent()
-        verify(getAllBreedsUseCase).invoke()
+        verify(getAllReposUseCase).invoke()
     }
 
     @Test
@@ -66,6 +66,6 @@ class BreedsViewModelTest {
     @Test
     fun `Breeds are requested when viewmodel starts`() = runTest {
         runCurrent()
-        verify(loadAllBreedsUseCase).invoke()
+        verify(loadAllReposUseCase).invoke()
     }
 }

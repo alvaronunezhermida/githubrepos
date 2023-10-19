@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.githubrepos.app.components.diffs.BreedImagesDiff
 import com.githubrepos.app.components.viewholders.BreedImageViewHolder
 import com.githubrepos.app.databinding.ViewHolderBreedImageBinding
-import com.githubrepos.domain.BreedImage
 
 class BreedImagesAdapter() : ListAdapter<BreedImage, BreedImageViewHolder>(BreedImagesDiff()) {
 

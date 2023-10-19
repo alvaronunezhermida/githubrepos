@@ -8,7 +8,6 @@ import com.githubrepos.app.R
 import com.githubrepos.app.components.adapters.BreedImagesAdapter
 import com.githubrepos.app.databinding.FragmentBreedImagesBinding
 import com.githubrepos.app.screens.BaseFragment
-import com.githubrepos.domain.BreedImage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

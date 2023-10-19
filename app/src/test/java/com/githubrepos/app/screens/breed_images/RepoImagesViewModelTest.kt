@@ -6,7 +6,6 @@ import arrow.core.right
 import com.githubrepos.app.navigation.AppNavigator
 import com.githubrepos.app.testcommons.CoroutinesTestRule
 import com.githubrepos.app.testcommons.sampleBreedImage
-import com.githubrepos.usecases.GetBreedImagesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -22,7 +21,7 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class BreedImagesViewModelTest {
+class RepoImagesViewModelTest {
 
     @get:Rule
     val coroutinesTestRule = CoroutinesTestRule()

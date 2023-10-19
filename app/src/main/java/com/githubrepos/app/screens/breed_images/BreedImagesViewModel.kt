@@ -4,9 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.githubrepos.app.navigation.AppNavigator
 import com.githubrepos.app.screens.AppViewModel
 import com.githubrepos.app.screens.breed_images.BreedImagesConfig.ARG_KEY
-import com.githubrepos.domain.BreedImage
 import com.githubrepos.domain.Error
-import com.githubrepos.usecases.GetBreedImagesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

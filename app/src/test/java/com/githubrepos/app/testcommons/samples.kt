@@ -1,9 +1,8 @@
 package com.githubrepos.app.testcommons
 
-import com.githubrepos.domain.Breed
-import com.githubrepos.domain.BreedImage
+import com.githubrepos.domain.Repo
 
-internal val sampleBreed = Breed(
+internal val sampleRepo = Repo(
     "American Terrier"
 )
 

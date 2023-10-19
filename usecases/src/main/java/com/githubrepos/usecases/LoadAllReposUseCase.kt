@@ -1,15 +1,15 @@
 package com.githubrepos.usecases
 
 import arrow.core.Either
-import com.githubrepos.data.repository.BreedsRepository
+import com.githubrepos.data.repository.Repository
 import com.githubrepos.domain.Empty
 import com.githubrepos.domain.Error
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class LoadAllBreedsUseCase @Inject constructor(private val breedsRepository: BreedsRepository) :
+class LoadAllReposUseCase @Inject constructor(private val repository: Repository) :
     BaseUseCase<Void, Empty>() {
 
     override fun run(params: Void?): Flow<Either<Error, Empty>> =
-        breedsRepository.loadAllBreeds()
+        repository.loadAllRepos()
 }

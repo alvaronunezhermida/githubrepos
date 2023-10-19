@@ -2,13 +2,13 @@ package com.githubrepos.app.di
 
 import android.app.Application
 import androidx.room.Room
-import com.githubrepos.app.data_implementation.local.BreedDatabase
-import com.githubrepos.app.data_implementation.local.BreedRoomDataSource
-import com.githubrepos.app.data_implementation.remote.BreedsApi
-import com.githubrepos.app.data_implementation.remote.clients.BreedsClient
+import com.githubrepos.app.data_implementation.local.Database
+import com.githubrepos.app.data_implementation.local.RoomDataSource
+import com.githubrepos.app.data_implementation.remote.GithubApi
+import com.githubrepos.app.data_implementation.remote.clients.Client
 import com.githubrepos.app.navigation.AppNavigator
-import com.githubrepos.data.source.BreedsLocalDataSource
-import com.githubrepos.data.source.BreedsRemoteDataSource
+import com.githubrepos.data.source.LocalDataSource
+import com.githubrepos.data.source.RemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,18 +43,18 @@ object AppModule {
     @Singleton
     fun provideDatabase(app: Application) = Room.databaseBuilder(
         app,
-        BreedDatabase::class.java,
-        "breeds-db"
+        Database::class.java,
+        "repos-db"
     ).build()
 
     @Provides
     @Singleton
-    fun provideBreedDao(db: BreedDatabase) = db.breedDao()
+    fun provideBreedDao(db: Database) = db.repoDao()
 
     @Provides
     @Singleton
     @ApiUrl
-    fun provideApiUrl(): String = "https://dog.ceo/api/"
+    fun provideApiUrl(): String = "https://api.github.com/"
 
     @Provides
     @Singleton
@@ -65,22 +65,22 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBreedsApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): BreedsApi {
+    fun provideBreedsApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): GithubApi {
         return Retrofit.Builder()
             .baseUrl(apiUrl)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-            .create(BreedsApi::class.java)
+            .create(GithubApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideBreedsLocalDataSource(breedsRoomDataSource: BreedRoomDataSource): BreedsLocalDataSource =
+    fun provideBreedsLocalDataSource(breedsRoomDataSource: RoomDataSource): LocalDataSource =
         breedsRoomDataSource
 
     @Provides
     @Singleton
-    fun provideBreedsRemoteDataSource(breedsClient: BreedsClient): BreedsRemoteDataSource =
+    fun provideBreedsRemoteDataSource(breedsClient: Client): RemoteDataSource =
         breedsClient
 }

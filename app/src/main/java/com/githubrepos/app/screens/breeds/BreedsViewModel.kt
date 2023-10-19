@@ -2,9 +2,9 @@ package com.githubrepos.app.screens.breeds
 
 import com.githubrepos.app.navigation.AppNavigator
 import com.githubrepos.app.screens.AppViewModel
-import com.githubrepos.domain.Breed
-import com.githubrepos.usecases.GetAllBreedsUseCase
-import com.githubrepos.usecases.LoadAllBreedsUseCase
+import com.githubrepos.domain.Repo
+import com.githubrepos.usecases.GetAllReposUseCase
+import com.githubrepos.usecases.LoadAllReposUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,13 +12,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BreedsViewModel @Inject constructor(
-    private val getAllBreedsUseCase: GetAllBreedsUseCase,
-    private val loadAllBreedsUseCase: LoadAllBreedsUseCase,
+    private val getAllReposUseCase: GetAllReposUseCase,
+    private val loadAllReposUseCase: LoadAllReposUseCase,
     appNavigator: AppNavigator
 ) : AppViewModel(appNavigator = appNavigator) {
 
-    private val breedsMutableState = MutableStateFlow(emptyList<Breed>())
-    val breedsState: StateFlow<List<Breed>>
+    private val breedsMutableState = MutableStateFlow(emptyList<Repo>())
+    val breedsState: StateFlow<List<Repo>>
         get() = breedsMutableState
 
     override fun onStarted() {
@@ -29,7 +29,7 @@ class BreedsViewModel @Inject constructor(
 
     private fun launchGetBreeds() {
         launch {
-            getAllBreedsUseCase().collect { breeds ->
+            getAllReposUseCase().collect { breeds ->
                 breedsMutableState.value = breeds
             }
         }
@@ -37,7 +37,7 @@ class BreedsViewModel @Inject constructor(
 
     private fun launchLoadAllBreeds() {
         launch {
-            loadAllBreedsUseCase().collect { either ->
+            loadAllReposUseCase().collect { either ->
                 either.fold(
                     ifLeft = { error ->
                         appNavigator.toError(error)
@@ -52,8 +52,8 @@ class BreedsViewModel @Inject constructor(
     }
 
 
-    fun onBreedClicked(breed: Breed) {
-        appNavigator.fromBreedsToBreedImages(breed.breedName)
+    fun onBreedClicked(repo: Repo) {
+        appNavigator.fromBreedsToBreedImages(repo.breedName)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.githubrepos.usecases
+package com.githubrepos.data
 
 import com.githubrepos.domain.Owner
 import com.githubrepos.domain.Repo

@@ -26,7 +26,7 @@ import androidx.fragment.app.viewModels
 import com.githubrepos.app.R
 import com.githubrepos.app.databinding.FragmentBreedsBinding
 import com.githubrepos.app.screens.BaseFragment
-import com.githubrepos.domain.Breed
+import com.githubrepos.domain.Repo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,27 +44,27 @@ class BreedsFragment : BaseFragment<FragmentBreedsBinding, BreedsViewModel>() {
         launchWhenStarted { viewModel.breedsState.collect(::observeBreeds) }
     }
 
-    private fun observeBreeds(breeds: List<Breed>) {
+    private fun observeBreeds(repos: List<Repo>) {
         binding.composeView.setContent {
             LazyColumn(Modifier.fillMaxSize()) {
-                items(breeds) { breed ->
+                items(repos) { breed ->
                     BreedCard(breed, viewModel)
                 }
             }
         }
-        binding.emptyState.root.isVisible = breeds.isEmpty()
-        binding.composeView.isVisible = breeds.isNotEmpty()
+        binding.emptyState.root.isVisible = repos.isEmpty()
+        binding.composeView.isVisible = repos.isNotEmpty()
     }
 
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BreedCard(breed: Breed, viewModel: BreedsViewModel) {
-    val breedName = breed.breedName.split(" ")
+fun BreedCard(repo: Repo, viewModel: BreedsViewModel) {
+    val breedName = repo.breedName.split(" ")
         .joinToString(" ") { it.replaceFirstChar { firstChar -> firstChar.uppercase() } }
     Card(
-        onClick = { viewModel.onBreedClicked(breed) },
+        onClick = { viewModel.onBreedClicked(repo) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),

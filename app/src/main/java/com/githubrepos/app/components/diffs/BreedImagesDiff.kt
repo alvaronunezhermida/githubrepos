@@ -1,7 +1,6 @@
 package com.githubrepos.app.components.diffs
 
 import androidx.recyclerview.widget.DiffUtil
-import com.githubrepos.domain.BreedImage
 
 class BreedImagesDiff : DiffUtil.ItemCallback<BreedImage>() {
 
