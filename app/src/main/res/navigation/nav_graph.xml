@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/breedsFragment"
-        android:name="com.githubrepos.app.screens.breeds.BreedsFragment"
+        android:name="com.githubrepos.app.screens.repos.BreedsFragment"
         android:label="fragment_breeds"
-        tools:layout="@layout/fragment_breeds" >
+        tools:layout="@layout/fragment_repos" >
 
         <action
             android:id="@+id/action_breedsFragment_to_breedImagesFragment"

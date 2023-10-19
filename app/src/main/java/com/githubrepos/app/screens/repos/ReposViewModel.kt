@@ -1,4 +1,4 @@
-package com.githubrepos.app.screens.breeds
+package com.githubrepos.app.screens.repos
 
 import com.githubrepos.app.navigation.AppNavigator
 import com.githubrepos.app.screens.AppViewModel
@@ -11,31 +11,31 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class BreedsViewModel @Inject constructor(
+class ReposViewModel @Inject constructor(
     private val getAllReposUseCase: GetAllReposUseCase,
     private val loadAllReposUseCase: LoadAllReposUseCase,
     appNavigator: AppNavigator
 ) : AppViewModel(appNavigator = appNavigator) {
 
-    private val breedsMutableState = MutableStateFlow(emptyList<Repo>())
-    val breedsState: StateFlow<List<Repo>>
-        get() = breedsMutableState
+    private val reposMutableState = MutableStateFlow(emptyList<Repo>())
+    val reposState: StateFlow<List<Repo>>
+        get() = reposMutableState
 
     override fun onStarted() {
         super.onStarted()
-        launchGetBreeds()
-        launchLoadAllBreeds()
+        launchGetRepos()
+        launchLoadAllRepos()
     }
 
-    private fun launchGetBreeds() {
+    private fun launchGetRepos() {
         launch {
-            getAllReposUseCase().collect { breeds ->
-                breedsMutableState.value = breeds
+            getAllReposUseCase().collect { repos ->
+                reposMutableState.value = repos
             }
         }
     }
 
-    private fun launchLoadAllBreeds() {
+    private fun launchLoadAllRepos() {
         launch {
             loadAllReposUseCase().collect { either ->
                 either.fold(
@@ -52,8 +52,8 @@ class BreedsViewModel @Inject constructor(
     }
 
 
-    fun onBreedClicked(repo: Repo) {
-        appNavigator.fromBreedsToBreedImages(repo.breedName)
+    fun onRepoClicked(repo: Repo) {
+        //TODO: implement navigation no detail
     }
 
 }

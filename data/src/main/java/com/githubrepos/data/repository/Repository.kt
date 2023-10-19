@@ -61,4 +61,10 @@ class Repository @Inject constructor(
         }
     }
 
+    fun countStargazers(stargazersUrl: String): Flow<Either<Error, Int>> = doRun {
+        flow {
+            emit(remoteDataSource.countStargazers(stargazersUrl))
+        }
+    }
+
 }
