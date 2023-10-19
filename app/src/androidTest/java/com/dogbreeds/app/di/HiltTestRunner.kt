@@ -1,4 +1,4 @@
-package com.dogbreeds.app.di
+package com.githubrepos.app.di
 
 import android.app.Application
 import android.content.Context

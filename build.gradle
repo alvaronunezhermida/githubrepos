@@ -1,4 +1,4 @@
-import com.dogbreeds.buildsrc.Libs
+import com.githubrepos.buildsrc.Libs
 
 buildscript {
     repositories {

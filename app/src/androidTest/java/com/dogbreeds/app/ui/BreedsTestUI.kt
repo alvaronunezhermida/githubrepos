@@ -1,4 +1,4 @@
-package com.dogbreeds.app.ui
+package com.githubrepos.app.ui
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -9,10 +9,10 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
-import com.dogbreeds.app.NavHostActivity
-import com.dogbreeds.app.R
-import com.dogbreeds.app.data.server.MockWebServerRule
-import com.dogbreeds.app.data.server.fromJson
+import com.githubrepos.app.NavHostActivity
+import com.githubrepos.app.R
+import com.githubrepos.app.data.server.MockWebServerRule
+import com.githubrepos.app.data.server.fromJson
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

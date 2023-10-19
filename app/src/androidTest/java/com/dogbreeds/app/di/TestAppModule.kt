@@ -1,14 +1,14 @@
-package com.dogbreeds.app.di
+package com.githubrepos.app.di
 
 import android.app.Application
 import androidx.room.Room
-import com.dogbreeds.app.data_implementation.local.BreedDatabase
-import com.dogbreeds.app.data_implementation.local.BreedRoomDataSource
-import com.dogbreeds.app.data_implementation.remote.BreedsApi
-import com.dogbreeds.app.data_implementation.remote.clients.BreedsClient
-import com.dogbreeds.app.navigation.AppNavigator
-import com.dogbreeds.data.source.BreedsLocalDataSource
-import com.dogbreeds.data.source.BreedsRemoteDataSource
+import com.githubrepos.app.data_implementation.local.BreedDatabase
+import com.githubrepos.app.data_implementation.local.BreedRoomDataSource
+import com.githubrepos.app.data_implementation.remote.BreedsApi
+import com.githubrepos.app.data_implementation.remote.clients.BreedsClient
+import com.githubrepos.app.navigation.AppNavigator
+import com.githubrepos.data.source.BreedsLocalDataSource
+import com.githubrepos.data.source.BreedsRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

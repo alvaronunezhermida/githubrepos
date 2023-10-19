@@ -1,4 +1,4 @@
-package com.dogbreeds.app.ui
+package com.githubrepos.app.ui
 
 import androidx.annotation.CheckResult
 import androidx.test.espresso.IdlingResource
