@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Github Repos</string>
+    <string name="breed_images">Breed Images</string>
+    <string name="default_error">Ups… Something is going wrong. Try again later</string>
+    <string name="ok">OK</string>
+    <string name="empty_state">Nothing found</string>
+</resources>

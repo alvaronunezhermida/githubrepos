@@ -1,0 +1,19 @@
+import com.dogbreeds.buildsrc.Libs
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.AndroidX.Navigation.gradlePlugin
+        classpath Libs.Hilt.gradlePlugin
+    }
+}
+
+
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}
