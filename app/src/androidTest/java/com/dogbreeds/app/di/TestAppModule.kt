@@ -1,14 +1,14 @@
-package com.dogbreeds.app.di
+package com.githubrepos.app.di
 
 import android.app.Application
 import androidx.room.Room
-import com.dogbreeds.app.data_implementation.local.BreedDatabase
-import com.dogbreeds.app.data_implementation.local.BreedRoomDataSource
-import com.dogbreeds.app.data_implementation.remote.BreedsApi
-import com.dogbreeds.app.data_implementation.remote.clients.BreedsClient
-import com.dogbreeds.app.navigation.AppNavigator
-import com.dogbreeds.data.source.BreedsLocalDataSource
-import com.dogbreeds.data.source.BreedsRemoteDataSource
+import com.githubrepos.app.data_implementation.local.Database
+import com.githubrepos.app.data_implementation.local.RoomDataSource
+import com.githubrepos.app.data_implementation.remote.GithubApi
+import com.githubrepos.app.data_implementation.remote.clients.Client
+import com.githubrepos.app.navigation.AppNavigator
+import com.githubrepos.data.source.LocalDataSource
+import com.githubrepos.data.source.RemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent
@@ -37,12 +37,12 @@ object TestAppModule {
     @Singleton
     fun provideDatabase(app: Application) = Room.inMemoryDatabaseBuilder(
         app,
-        BreedDatabase::class.java
+        Database::class.java
     ).build()
 
     @Provides
     @Singleton
-    fun provideBreedDao(db: BreedDatabase) = db.breedDao()
+    fun provideBreedDao(db: Database) = db.repoDao()
 
     @Provides
     @Singleton
@@ -58,7 +58,7 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideBreedsApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): BreedsApi {
+    fun provideBreedsApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): GithubApi {
         return Retrofit.Builder()
             .baseUrl(apiUrl)
             .client(okHttpClient)
@@ -69,11 +69,11 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideBreedsLocalDataSource(breedsRoomDataSource: BreedRoomDataSource): BreedsLocalDataSource =
+    fun provideBreedsLocalDataSource(breedsRoomDataSource: RoomDataSource): LocalDataSource =
         breedsRoomDataSource
 
     @Provides
     @Singleton
-    fun provideBreedsRemoteDataSource(breedsClient: BreedsClient): BreedsRemoteDataSource =
+    fun provideBreedsRemoteDataSource(breedsClient: Client): RemoteDataSource =
         breedsClient
 }

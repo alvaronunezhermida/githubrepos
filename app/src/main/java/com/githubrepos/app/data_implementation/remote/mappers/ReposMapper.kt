@@ -1,0 +1,76 @@
+package com.githubrepos.app.data_implementation.remote.mappers
+
+import com.githubrepos.app.data_implementation.remote.models.OwnerDTO
+import com.githubrepos.app.data_implementation.remote.models.RepoDTO
+import com.githubrepos.domain.Owner
+import com.githubrepos.domain.Repo
+
+fun RepoDTO.toDomain(): Repo = Repo(
+    id = id,
+    nodeId = nodeId,
+    name = name,
+    fullName = fullName,
+    private = private,
+    owner = owner.toDomain(),
+    htmlUrl = htmlUrl,
+    description = description,
+    fork = fork,
+    url = url,
+    forksUrl = forksUrl,
+    keysUrl = keysUrl,
+    collaboratorsUrl = collaboratorsUrl,
+    teamsUrl = teamsUrl,
+    hooksUrl = hooksUrl,
+    issueEventsUrl = issueEventsUrl,
+    eventsUrl = eventsUrl,
+    assigneesUrl = assigneesUrl,
+    branchesUrl = branchesUrl,
+    tagsUrl = tagsUrl,
+    blobsUrl = blobsUrl,
+    gitTagsUrl = gitTagsUrl,
+    gitRefsUrl = gitRefsUrl,
+    treesUrl = treesUrl,
+    statusesUrl = statusesUrl,
+    languagesUrl = languagesUrl,
+    stargazersUrl = stargazersUrl,
+    contributorsUrl = contributorsUrl,
+    subscribersUrl = subscribersUrl,
+    subscriptionUrl = subscriptionUrl,
+    commitsUrl = commitsUrl,
+    gitCommitsUrl = gitCommitsUrl,
+    commentsUrl = commentsUrl,
+    issueCommentUrl = issueCommentUrl,
+    contentsUrl = contentsUrl,
+    compareUrl = compareUrl,
+    mergesUrl = mergesUrl,
+    archiveUrl = archiveUrl,
+    downloadsUrl = downloadsUrl,
+    issuesUrl = issuesUrl,
+    pullsUrl = pullsUrl,
+    milestonesUrl = milestonesUrl,
+    notificationsUrl = notificationsUrl,
+    labelsUrl = labelsUrl,
+    releasesUrl = releasesUrl,
+    deploymentsUrl = deploymentsUrl
+)
+
+fun OwnerDTO.toDomain(): Owner = Owner(
+    login = login,
+    id = id,
+    nodeId = nodeId,
+    avatarUrl = avatarUrl,
+    gravatarId = gravatarId,
+    url = url,
+    htmlUrl = htmlUrl,
+    followersUrl = followersUrl,
+    followingUrl = followingUrl,
+    gistsUrl = gistsUrl,
+    starredUrl = starredUrl,
+    subscriptionsUrl = subscriptionsUrl,
+    organizationsUrl = organizationsUrl,
+    reposUrl = reposUrl,
+    eventsUrl = eventsUrl,
+    receivedEventsUrl = receivedEventsUrl,
+    type = type,
+    siteAdmin = siteAdmin
+)

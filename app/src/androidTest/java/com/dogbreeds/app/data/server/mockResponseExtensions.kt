@@ -1,4 +1,4 @@
-package com.dogbreeds.app.data.server
+package com.githubrepos.app.data.server
 
 import androidx.test.platform.app.InstrumentationRegistry
 import okhttp3.mockwebserver.MockResponse
