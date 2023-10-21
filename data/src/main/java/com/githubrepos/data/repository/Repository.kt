@@ -63,13 +63,58 @@ class Repository @Inject constructor(
 
     fun countStargazers(repoId: Int, stargazersUrl: String): Flow<Either<Error, Empty>> = doRun {
         flow {
-            val count = remoteDataSource.countStargazers(stargazersUrl)
-            count.fold(
+            remoteDataSource.countStargazers(stargazersUrl).fold(
                 ifLeft = { emit(Error.Unknown.left()) },
-                ifRight = {
-                    localDataSource.saveStargazersCount(repoId, it)
+                ifRight = { count ->
+                    localDataSource.getRepo(repoId).fold(
+                        ifLeft = { emit(Error.Unknown.left()) },
+                        ifRight = {
+                            localDataSource.updateRepo(it.copy(stargazersCount = count))
+                            emit(Empty().right())
+                        }
+                    )
                 }
             )
+        }
+    }
+
+    fun countForks(repoId: Int, forksUrl: String): Flow<Either<Error, Int>> = doRun {
+        flow {
+            remoteDataSource.countForks(forksUrl).fold(
+                ifLeft = { emit(Error.Unknown.left()) },
+                ifRight = { count ->
+                    localDataSource.getRepo(repoId).fold(
+                        ifLeft = { emit(Error.Unknown.left()) },
+                        ifRight = {
+                            localDataSource.updateRepo(it.copy(forksCount = count))
+                            emit(count.right())
+                        }
+                    )
+                }
+            )
+        }
+    }
+
+    fun getLanguage(repoId: Int, languagesUrl: String): Flow<Either<Error, String>> = doRun {
+        flow {
+            remoteDataSource.getLanguage(languagesUrl).fold(
+                ifLeft = { emit(Error.Unknown.left()) },
+                ifRight = { language ->
+                    localDataSource.getRepo(repoId).fold(
+                        ifLeft = { emit(Error.Unknown.left()) },
+                        ifRight = {
+                            localDataSource.updateRepo(it.copy(language = language))
+                            emit(language.right())
+                        }
+                    )
+                }
+            )
+        }
+    }
+
+    fun getRepo(repoId: Int): Flow<Either<Error, Repo>> = doRun {
+        flow {
+            emit(localDataSource.getRepo(repoId))
         }
     }
 

@@ -30,4 +30,22 @@ class Client @Inject constructor(
             dto.size
         }
     )
+
+    override suspend fun countForks(forksUrl: String): Either<Error, Int> = doRun(
+        getResponse = {
+            githubApi.getStargazers(forksUrl)
+        },
+        map = { dto ->
+            dto.size
+        }
+    )
+
+    override suspend fun getLanguage(languagesUrl: String): Either<Error, String> = doRun(
+        getResponse = {
+            githubApi.getLanguages(languagesUrl)
+        },
+        map = { dto ->
+            dto.keys.first()
+        }
+    )
 }

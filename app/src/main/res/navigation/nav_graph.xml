@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/breedsFragment">
+    app:startDestination="@id/reposFragment">
 
     <fragment
-        android:id="@+id/breedsFragment"
-        android:name="com.githubrepos.app.screens.repos.BreedsFragment"
-        android:label="fragment_breeds"
-        tools:layout="@layout/fragment_repos" >
+        android:id="@+id/reposFragment"
+        android:name="com.githubrepos.app.screens.repos.ReposFragment"
+        android:label="fragment_repos"
+        tools:layout="@layout/fragment_repos">
 
         <action
-            android:id="@+id/action_breedsFragment_to_breedImagesFragment"
-            app:destination="@id/breedImagesFragment"
+            android:id="@+id/action_reposFragment_to_repoDetailFragment"
+            app:destination="@id/repoDetailFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -23,10 +23,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/breedImagesFragment"
-        android:name="com.githubrepos.app.screens.breed_images.BreedImagesFragment"
-        android:label="fragment_breed_images"
-        tools:layout="@layout/fragment_breed_images"/>
+        android:id="@+id/repoDetailFragment"
+        android:name="com.githubrepos.app.screens.repo_detail.RepoDetailFragment"
+        android:label="fragment_repo_detail"
+        tools:layout="@layout/fragment_repo_detail" />
 
 
     <dialog

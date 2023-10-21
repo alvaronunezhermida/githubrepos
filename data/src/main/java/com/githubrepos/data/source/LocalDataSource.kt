@@ -11,5 +11,6 @@ interface LocalDataSource {
 
     suspend fun isReposListEmpty(): Boolean
     suspend fun saveRepos(repos: List<Repo>): Either<Error, Empty>
-    suspend fun saveStargazersCount(repoId: Int, count: Int): Either<Error, Empty>
+    suspend fun updateRepo(repo: Repo): Either<Error, Empty>
+    suspend fun getRepo(repoId: Int): Either<Error, Repo>
 }

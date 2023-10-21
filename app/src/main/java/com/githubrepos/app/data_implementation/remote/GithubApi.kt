@@ -16,4 +16,14 @@ interface GithubApi {
         @Url stargazersUrl: String
     ): Response<List<StargazerDTO>>
 
+    @GET
+    suspend fun getForks(
+        @Url forksUrl: String
+    ): Response<List<StargazerDTO>>
+
+    @GET
+    suspend fun getLanguages(
+        @Url languagesUrl: String
+    ): Response<Map<String, Int>>
+
 }
