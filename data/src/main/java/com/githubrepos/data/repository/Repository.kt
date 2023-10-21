@@ -44,7 +44,7 @@ class Repository @Inject constructor(
      *   - If the operation is successful, [Empty] is emitted as [Either.Right].
      *   - If an error occurs, [Error.Unknown] is emitted as [Either.Left].
      */
-    fun loadAllRepos(): Flow<Either<Error, Empty>> = doRun {
+    fun loadAllRepos(): Flow<Either<Error, List<Repo>>> = doRun {
         flow {
             if (localDataSource.isReposListEmpty()) {
                 val repos = remoteDataSource.getAllRepos()
@@ -52,18 +52,24 @@ class Repository @Inject constructor(
                     ifLeft = { emit(Error.Unknown.left()) },
                     ifRight = {
                         localDataSource.saveRepos(it)
-                        emit(Empty().right())
+                        emit(it.right())
                     }
                 )
             } else {
-                emit(Empty().right())
+                emit(emptyList<Repo>().right())
             }
         }
     }
 
-    fun countStargazers(stargazersUrl: String): Flow<Either<Error, Int>> = doRun {
+    fun countStargazers(repoId: Int, stargazersUrl: String): Flow<Either<Error, Empty>> = doRun {
         flow {
-            emit(remoteDataSource.countStargazers(stargazersUrl))
+            val count = remoteDataSource.countStargazers(stargazersUrl)
+            count.fold(
+                ifLeft = { emit(Error.Unknown.left()) },
+                ifRight = {
+                    localDataSource.saveStargazersCount(repoId, it)
+                }
+            )
         }
     }
 

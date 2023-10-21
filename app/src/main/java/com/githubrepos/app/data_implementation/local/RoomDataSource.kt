@@ -25,4 +25,13 @@ class RoomDataSource @Inject constructor(private val repoDao: RepoDao) :
     } catch (e: Exception) {
         Error.Unknown.left()
     }
+
+    override suspend fun saveStargazersCount(repoId: Int, count: Int): Either<Error, Empty> = try {
+        val repo = repoDao.getRepo(repoId)
+        repo.stargazersCount = count
+        repoDao.updateRepo(repo)
+        Empty().right()
+    } catch (e: Exception) {
+        Error.Unknown.left()
+    }
 }
