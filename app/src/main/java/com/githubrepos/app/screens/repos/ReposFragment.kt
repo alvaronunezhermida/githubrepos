@@ -11,7 +11,7 @@ import com.githubrepos.domain.Repo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BreedsFragment : BaseFragment<FragmentReposBinding, ReposViewModel>() {
+class ReposFragment : BaseFragment<FragmentReposBinding, ReposViewModel>() {
 
     override val viewModel: ReposViewModel by viewModels()
 

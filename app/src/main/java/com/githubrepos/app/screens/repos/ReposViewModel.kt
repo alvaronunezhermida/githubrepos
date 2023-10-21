@@ -76,7 +76,7 @@ class ReposViewModel @Inject constructor(
 
 
     fun onRepoClicked(repo: Repo) {
-        //TODO: implement navigation no detail
+        appNavigator.fromReposToRepoDetail(repo.id)
     }
 
 }

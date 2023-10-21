@@ -4,4 +4,5 @@
     <string name="default_error">Ups… Something is going wrong. Try again later</string>
     <string name="ok">OK</string>
     <string name="empty_state">Nothing found</string>
+    <string name="repo_url_button">Open Repository</string>
 </resources>
