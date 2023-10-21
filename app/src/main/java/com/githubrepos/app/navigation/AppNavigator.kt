@@ -2,7 +2,6 @@ package com.githubrepos.app.navigation
 
 import android.os.Bundle
 import com.githubrepos.app.R
-import com.githubrepos.app.screens.breed_images.BreedImagesConfig.ARG_KEY
 import javax.inject.Inject
 
 /**
@@ -18,7 +17,7 @@ class AppNavigator @Inject constructor() : ActivityNavigator() {
     fun fromBreedsToBreedImages(breedName: String) {
         goTo(id = R.id.action_breedsFragment_to_breedImagesFragment,
             args = Bundle().apply {
-                putString(ARG_KEY, breedName)
+                //putString(ARG_KEY, breedName)
             })
     }
 }

@@ -10,11 +10,9 @@ class RepoViewHolder(
 
     override fun bind(item: Repo) {
         binding.root.setOnClickListener { onRepoClicked(item) }
-
-        val breedName = item.name.split(" ")
-            .joinToString(" ") { it.replaceFirstChar { firstChar -> firstChar.uppercase() } }
-        binding.repoNameText.text = breedName
+        binding.repoNameText.text = item.name
         binding.repoDescriptionText.text = item.description
+        binding.stargazersCountText.text = item.stargazersCount.toString()
 
     }
 

@@ -27,17 +27,25 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="A Good Place" />
 
-        <RatingBar
-            android:id="@+id/rating"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="@drawable/ic_star"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@+id/stargazers_count_text"
+            app:layout_constraintTop_toTopOf="@+id/stargazers_count_text"
+            app:layout_constraintBottom_toBottomOf="@+id/stargazers_count_text" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/stargazers_count_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:stepSize="0.1"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="4" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/repo_description_text"
@@ -46,6 +54,7 @@
             android:layout_margin="@dimen/margin_default"
             android:textSize="14sp"
             android:lines="5"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

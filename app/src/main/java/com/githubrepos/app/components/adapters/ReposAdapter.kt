@@ -3,19 +3,19 @@ package com.githubrepos.app.components.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.dogbreeds.app.components.diffs.BreedsDiff
-import com.dogbreeds.app.components.viewholders.BreedViewHolder
-import com.dogbreeds.app.databinding.ViewHolderBreedsBinding
-import com.dogbreeds.domain.Breed
+import com.githubrepos.app.components.diffs.ReposDiff
+import com.githubrepos.app.components.viewholders.RepoViewHolder
+import com.githubrepos.app.databinding.ViewHolderReposBinding
+import com.githubrepos.domain.Repo
 
 class ReposAdapter(
-    private val onBreedClicked: (Breed) -> Unit,
-) : ListAdapter<Breed, BreedViewHolder>(BreedsDiff()) {
+    private val onRepoClicked: (Repo) -> Unit,
+) : ListAdapter<Repo, RepoViewHolder>(ReposDiff()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreedViewHolder =
-        BreedViewHolder(
-            onBreedClicked = onBreedClicked,
-            binding = ViewHolderBreedsBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder =
+        RepoViewHolder(
+            onRepoClicked = onRepoClicked,
+            binding = ViewHolderReposBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -23,7 +23,7 @@ class ReposAdapter(
         )
 
 
-    override fun onBindViewHolder(holder: BreedViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }
