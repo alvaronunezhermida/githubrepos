@@ -6,4 +6,5 @@ import com.githubrepos.domain.Repo
 
 interface RemoteDataSource {
     suspend fun getAllRepos(): Either<Error, List<Repo>>
+    suspend fun countStargazers(stargazersUrl: String): Either<Error, Int>
 }

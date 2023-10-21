@@ -21,4 +21,13 @@ class Client @Inject constructor(
             dto.map { it.toDomain() }
         }
     )
+
+    override suspend fun countStargazers(stargazersUrl: String): Either<Error, Int> = doRun(
+        getResponse = {
+            githubApi.getStargazers(stargazersUrl)
+        },
+        map = { dto ->
+            dto.size
+        }
+    )
 }

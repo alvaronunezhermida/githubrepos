@@ -1,4 +1,4 @@
-package com.githubrepos.app.screens.breeds
+package com.githubrepos.app.screens.repos
 
 import app.cash.turbine.test
 import arrow.core.right
@@ -24,7 +24,7 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class BreedsViewModelTest {
+class ReposViewModelTest {
 
     @get:Rule
     val coroutinesTestRule = CoroutinesTestRule()
@@ -38,7 +38,7 @@ class BreedsViewModelTest {
     @Mock
     lateinit var appNavigator: AppNavigator
 
-    private lateinit var vm: BreedsViewModel
+    private lateinit var vm: ReposViewModel
 
     private val breeds = listOf(sampleRepo)
 
@@ -46,7 +46,7 @@ class BreedsViewModelTest {
     fun setUp() {
         whenever(getAllReposUseCase()).thenReturn(flowOf(breeds))
         whenever(loadAllReposUseCase()).thenReturn(flowOf(Empty().right()))
-        vm = BreedsViewModel(getAllReposUseCase, loadAllReposUseCase, appNavigator)
+        vm = ReposViewModel(getAllReposUseCase, loadAllReposUseCase, appNavigator)
         vm.onStarted()
     }
 
@@ -58,7 +58,7 @@ class BreedsViewModelTest {
 
     @Test
     fun `State is updated with current cached content immediately`() = runTest {
-        vm.breedsState.test {
+        vm.reposState.test {
             assertEquals(breeds, awaitItem())
         }
     }

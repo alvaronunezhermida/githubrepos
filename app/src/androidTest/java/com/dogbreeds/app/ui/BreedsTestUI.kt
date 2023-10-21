@@ -55,7 +55,7 @@ class MainInstrumentationTest {
 
     @Test
     fun breeds_screen_is_displayed() {
-        onView(withId(R.id.breedsAppBar)).check(matches(isDisplayed()))
+        onView(withId(R.id.reposAppBar)).check(matches(isDisplayed()))
     }
 
     @Test
