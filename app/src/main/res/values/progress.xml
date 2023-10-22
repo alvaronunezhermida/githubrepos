@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="Progress" />
+
+    <style name="Progress.Loader">
+        <item name="android:indeterminate">true</item>
+    </style>
+
+</resources>

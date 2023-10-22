@@ -45,7 +45,11 @@ class Client @Inject constructor(
             githubApi.getLanguages(languagesUrl)
         },
         map = { dto ->
-            dto.keys.first()
+            try {
+                dto.keys.first()
+            } catch (e: Exception) {
+                ""
+            }
         }
     )
 }

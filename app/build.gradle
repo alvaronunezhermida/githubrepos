@@ -89,6 +89,8 @@ dependencies {
 
     implementation Libs.Coil.coilCompose
 
+    implementation Libs.Lottie.lottie
+
     implementation Libs.OkHttp3.okhttp3
     implementation Libs.OkHttp3.loginInterceptor
     implementation Libs.Retrofit.retrofit

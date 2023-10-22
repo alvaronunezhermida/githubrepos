@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/repoDetailAppBar"
@@ -32,13 +33,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/repoMainContent"
-            android:background="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:background="?attr/colorPrimary"
             android:padding="@dimen/margin_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/repoTitle"
@@ -48,21 +49,36 @@
                 android:textAlignment="gravity"
                 android:textColor="@color/white"
                 android:textSize="32sp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="@dimen/margin_default"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/forksCountContainer"
                 tools:text="Repo title" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/languageCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:contentPaddingLeft="@dimen/margin_small"
-                app:contentPaddingRight="@dimen/margin_small"
                 app:cardBackgroundColor="@color/md_theme_light_primaryContainer"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
+                app:contentPaddingLeft="@dimen/margin_small"
+                app:contentPaddingRight="@dimen/margin_small"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/languageLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp"
+                    android:layout_margin="@dimen/margin_xsmall"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/dots_loading" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/languageText"
@@ -70,57 +86,95 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/margin_xsmall"
                     android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@id/forksCountText"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:text="Kotlin" />
 
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_margin="@dimen/margin_small"
-                android:src="@drawable/ic_star"
-                android:tint="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/starsCountText"
-                app:layout_constraintBottom_toBottomOf="@id/starsCountText"
-                app:layout_constraintTop_toTopOf="@id/starsCountText" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/starsCountText"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/starsCountContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/forksCountText"
-                tools:text="2" />
+                app:layout_constraintBottom_toTopOf="@id/forksCountContainer"
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/forkIcon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_margin="@dimen/margin_small"
-                android:src="@drawable/ic_fork"
-                android:tint="@color/white"
-                android:text="0"
-                app:layout_constraintEnd_toStartOf="@+id/forksCountText"
-                app:layout_constraintBottom_toBottomOf="@id/forksCountText"
-                app:layout_constraintTop_toTopOf="@id/forksCountText" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/starsIcon"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:padding="@dimen/margin_xxxsmall"
+                    android:layout_margin="@dimen/margin_small"
+                    android:src="@drawable/ic_star"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/forksCountText"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/starsCountText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:layout_margin="@dimen/margin_small"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/starsIcon"
+                    app:layout_constraintTop_toTopOf="@+id/starsIcon"
+                    app:layout_constraintEnd_toStartOf="@id/starsIcon"
+                    tools:text="2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/forksCountContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="12" />
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/forkIcon"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:src="@drawable/ic_fork"
+                    android:text="0"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/forksCountText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:text="0"
+                    android:layout_margin="@dimen/margin_small"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    tools:text="12"
+                    app:layout_constraintBottom_toBottomOf="@+id/forkIcon"
+                    app:layout_constraintTop_toTopOf="@+id/forkIcon"
+                    app:layout_constraintEnd_toStartOf="@id/forkIcon" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/forksLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="8dp"
+                    android:layout_margin="@dimen/margin_xsmall"
+                    android:scaleType="centerCrop"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/forkIcon"
+                    app:layout_constraintTop_toTopOf="@+id/forkIcon"
+                    app:layout_constraintEnd_toStartOf="@id/forkIcon"
+                    app:lottie_rawRes="@raw/dots_loading_white" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,8 +185,8 @@
             android:gravity="bottom"
             android:padding="@dimen/margin_default"
             android:textAlignment="gravity"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/repoMainContent"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
 
@@ -142,8 +196,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="@string/repo_url_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

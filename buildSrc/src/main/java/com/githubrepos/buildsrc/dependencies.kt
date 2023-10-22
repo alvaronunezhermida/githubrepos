@@ -83,6 +83,11 @@ object Libs {
         const val coilCompose = "io.coil-kt:coil-compose:$version"
     }
 
+    object Lottie {
+        private const val version = "3.5.0"
+        const val lottie = "com.airbnb.android:lottie:$version"
+    }
+
     object OkHttp3 {
         private const val version = "4.11.0"
         const val okhttp3 = "com.squareup.okhttp3:okhttp:$version"

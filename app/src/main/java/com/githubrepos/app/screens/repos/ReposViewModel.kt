@@ -32,14 +32,17 @@ class ReposViewModel @Inject constructor(
 
     private fun launchGetRepos() {
         launch {
+            fullscreenLoaderMutableState.value = true
             getAllReposUseCase().collect { repos ->
                 reposMutableState.value = repos
+                if (repos.isNotEmpty()) fullscreenLoaderMutableState.value = false
             }
         }
     }
 
     private fun launchLoadAllRepos() {
         launch {
+            fullscreenLoaderMutableState.value = true
             loadAllReposUseCase().collect { either ->
                 either.fold(
                     ifLeft = { error ->
@@ -66,6 +69,7 @@ class ReposViewModel @Inject constructor(
                                     }
                                 }
                             }
+                            fullscreenLoaderMutableState.value = false
                         }
                     }
                 )
