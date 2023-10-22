@@ -12,7 +12,11 @@ class RepoViewHolder(
         binding.root.setOnClickListener { onRepoClicked(item) }
         binding.repoNameText.text = item.name
         binding.repoDescriptionText.text = item.description
-        binding.stargazersCountText.text = item.stargazersCount.toString()
+        binding.stargazersLoading.visibility =
+            if (item.stargazersCount == null) android.view.View.VISIBLE else android.view.View.GONE
+        binding.stargazersCountText.visibility =
+            if (item.stargazersCount == null) android.view.View.GONE else android.view.View.VISIBLE
+        binding.stargazersCountText.text = (item.stargazersCount ?: 0).toString()
 
     }
 

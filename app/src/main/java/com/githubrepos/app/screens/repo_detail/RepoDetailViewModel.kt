@@ -27,12 +27,12 @@ class RepoDetailViewModel @Inject constructor(
     val repoState: StateFlow<Repo?>
         get() = repoMutableState
 
-    private val countForksMutableState = MutableStateFlow(0)
-    val countForksState: StateFlow<Int>
+    private val countForksMutableState = MutableStateFlow<Int?>(null)
+    val countForksState: StateFlow<Int?>
         get() = countForksMutableState
 
-    private val languageMutableState = MutableStateFlow("")
-    val languageState: StateFlow<String>
+    private val languageMutableState = MutableStateFlow<String?>(null)
+    val languageState: StateFlow<String?>
         get() = languageMutableState
 
     override fun onStarted() {
@@ -50,7 +50,7 @@ class RepoDetailViewModel @Inject constructor(
                         },
                         ifRight = { repo ->
                             repoMutableState.value = repo
-                            if (repo.forksCount == 0) loadCountForks(repo)
+                            if (repo.forksCount == null) loadCountForks(repo)
                             if (repo.language.isNullOrBlank()) loadGetLanguage(repo)
                         }
                     )

@@ -8,6 +8,7 @@ import com.githubrepos.app.databinding.FragmentRepoDetailBinding
 import com.githubrepos.app.screens.BaseFragment
 import com.githubrepos.domain.Repo
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class RepoDetailFragment : BaseFragment<FragmentRepoDetailBinding, RepoDetailViewModel>() {
@@ -40,17 +41,25 @@ class RepoDetailFragment : BaseFragment<FragmentRepoDetailBinding, RepoDetailVie
         binding.repoTitle.text = repo?.name ?: ""
         binding.repoDescription.text = repo?.description ?: ""
         binding.starsCountText.text = repo?.stargazersCount.toString()
-        binding.forksCountText.text = repo?.forksCount.toString()
-        binding.languageCard.visibility = if (repo?.language.isNullOrBlank()) View.GONE else View.VISIBLE
+
+        binding.forksLoading.visibility = if (repo?.forksCount == null) View.VISIBLE else View.GONE
+        binding.forksCountText.visibility = if (repo?.forksCount == null) View.GONE else View.VISIBLE
+        binding.forksCountText.text = (repo?.forksCount?:0).toString()
+
+        binding.languageLoading.visibility = if (repo?.language.isNullOrEmpty()) View.VISIBLE else View.GONE
+        binding.languageText.visibility = if (repo?.language.isNullOrEmpty()) View.GONE else View.VISIBLE
         binding.languageText.text = repo?.language
     }
 
-    private fun observeCountForks(count: Int) {
-        binding.forksCountText.text = count.toString()
+    private fun observeCountForks(count: Int?) {
+        binding.forksLoading.visibility = if (count == null) View.VISIBLE else View.GONE
+        binding.forksCountText.visibility = if (count == null) View.GONE else View.VISIBLE
+        binding.forksCountText.text = (count?:0).toString()
     }
 
-    private fun observeLanguage(language: String) {
-        binding.languageCard.visibility = if (language.isEmpty()) View.GONE else View.VISIBLE
+    private fun observeLanguage(language: String?) {
+        binding.languageLoading.visibility = if (language.isNullOrEmpty()) View.VISIBLE else View.GONE
+        binding.languageText.visibility = if (language.isNullOrEmpty()) View.GONE else View.VISIBLE
         binding.languageText.text = language
     }
 

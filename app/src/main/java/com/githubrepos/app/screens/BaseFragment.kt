@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.githubrepos.app.NavHostActivity
 import kotlinx.coroutines.CoroutineScope
 
 /**
@@ -46,7 +47,7 @@ abstract class BaseFragment<out VB : ViewBinding, out VM : BaseViewModel> : Frag
     protected open fun initViews() = Unit
 
     protected open fun initObservers() {
-
+        launchWhenStarted { viewModel.fullscreenLoaderState.collect(::observeFullscreenLoader) }
     }
 
     protected fun launchWhenCreated(body: suspend CoroutineScope.() -> Unit) {
@@ -78,6 +79,16 @@ abstract class BaseFragment<out VB : ViewBinding, out VM : BaseViewModel> : Frag
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeFullscreenLoader(isVisible: Boolean) {
+        (activity as? NavHostActivity)?.let { activity ->
+            if (isVisible) {
+                activity.showFullscreenLoader()
+            } else {
+                activity.hideFullscreenLoader()
+            }
+        }
     }
 
 }

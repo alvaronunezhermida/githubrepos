@@ -28,24 +28,39 @@
             tools:text="A Good Place" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_star"
             android:src="@drawable/ic_star"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_marginEnd="@dimen/margin_small"
-            app:layout_constraintEnd_toStartOf="@+id/stargazers_count_text"
-            app:layout_constraintTop_toTopOf="@+id/stargazers_count_text"
-            app:layout_constraintBottom_toBottomOf="@+id/stargazers_count_text" />
+            android:layout_margin="@dimen/margin_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/stargazers_count_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
             android:textSize="16sp"
+            android:layout_marginEnd="@dimen/margin_small"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/ic_star"
+            app:layout_constraintTop_toTopOf="@+id/ic_star"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_star"
             tools:text="4" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/stargazersLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="8dp"
+            android:layout_margin="@dimen/margin_xsmall"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:layout_constraintEnd_toStartOf="@+id/ic_star"
+            app:layout_constraintTop_toTopOf="@+id/ic_star"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_star"
+            app:lottie_rawRes="@raw/dots_loading" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/repo_description_text"

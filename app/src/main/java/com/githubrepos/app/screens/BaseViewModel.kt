@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -27,6 +29,10 @@ open class BaseViewModel(
     private val dispatcher: CoroutineContext = Dispatchers.Main,
     private val exceptionHandler: CoroutineExceptionHandler? = null
 ) : ViewModel() {
+
+    protected val fullscreenLoaderMutableState = MutableStateFlow(false)
+    val fullscreenLoaderState: StateFlow<Boolean>
+        get() = fullscreenLoaderMutableState
 
     private var scope: CoroutineScope = initScope()
         get() {
