@@ -42,7 +42,7 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideBreedDao(db: Database) = db.repoDao()
+    fun provideRepoDao(db: Database) = db.repoDao()
 
     @Provides
     @Singleton
@@ -58,7 +58,7 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideBreedsApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): GithubApi {
+    fun provideReposApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): GithubApi {
         return Retrofit.Builder()
             .baseUrl(apiUrl)
             .client(okHttpClient)
@@ -69,11 +69,11 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideBreedsLocalDataSource(breedsRoomDataSource: RoomDataSource): LocalDataSource =
-        breedsRoomDataSource
+    fun provideReposLocalDataSource(roomDataSource: RoomDataSource): LocalDataSource =
+        roomDataSource
 
     @Provides
     @Singleton
-    fun provideBreedsRemoteDataSource(breedsClient: Client): RemoteDataSource =
-        breedsClient
+    fun provideReposRemoteDataSource(client: Client): RemoteDataSource =
+        client
 }

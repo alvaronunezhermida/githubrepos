@@ -29,7 +29,7 @@ class ReposFragment : BaseFragment<FragmentReposBinding, ReposViewModel>() {
 
     override fun initObservers() {
         super.initObservers()
-        launchWhenStarted { viewModel.reposState.collect(::observeBreeds) }
+        launchWhenStarted { viewModel.reposState.collect(::observeRepos) }
     }
 
     private fun initReposList() {
@@ -39,7 +39,7 @@ class ReposFragment : BaseFragment<FragmentReposBinding, ReposViewModel>() {
         binding.reposRecycler.adapter = reposAdapter
     }
 
-    private fun observeBreeds(repos: List<Repo>) {
+    private fun observeRepos(repos: List<Repo>) {
         reposAdapter.submitList(repos)
         binding.emptyState.root.isVisible = repos.isEmpty()
         binding.reposRecycler.isVisible = repos.isNotEmpty()

@@ -1,13 +1,13 @@
-# DogBreeds - Clean Architecture and MVVM
-This project probably doesn't need this overengineering, it is just an example of clean architecture and MVVM pattern written in kotlin. It is a simple app that shows a list of dog breeds and their images. The data is retrieved from the [Dog API](https://dog.ceo/dog-api/).
+# Github Repositories - Clean Architecture and MVVM
+This project probably doesn't need this overengineering, it is just an example of clean architecture and MVVM pattern written in kotlin. It is a simple app that shows a list of github repositories and their details. The data is retrieved from the [Github API](https://api.github.com/).
 
-[**Project Repository**](https://github.com/alvaronunezhermida/dogbreeds)
+[**Project Repository**](https://github.com/alvaronunezhermida/githubrepos)
 
 ## Screenshots
 
 <div style="display: flex;">
-    <img src="README_FILES/breeds-screen.jpg" alt="Breeds Screen" style="width: 35%; height: auto;">
-    <img src="README_FILES/breed-images-screen.jpg" alt="Breed Images Screen" style="width: 35%; height: auto;">
+    <img src="README_FILES/repos-screen.jpg" alt="Repos Screen" style="width: 35%; height: auto;">
+    <img src="README_FILES/repo-detail-screen.jpg" alt="Repo Detail Screen" style="width: 35%; height: auto;">
 </div>
 
 ## Clean Architecture Layers
@@ -32,9 +32,8 @@ This project probably doesn't need this overengineering, it is just an example o
 * [Unidirectional Data Flow](https://developer.android.com/jetpack/compose/architecture#:~:text=A%20unidirectional%20data%20flow%20(UDF,that%20store%20and%20change%20state))
 
 # Includes
-* **Compose** was embedded in the Breeds Screen used for the **Breeds List**
-* The rest of the ui was implemented using **XML** and **View Binding**
-* **Room** was used to cache the **Breeds List**
+* **XML** and **View Binding** were used to implement the UI
+* **Room** was used to cache the **Repos List**
 * **Flow** was used to retrieve the data from the **Repository** and to update the ui through the **ViewModel**
 * **Libs Dependencies** are managed in the **buildSrc** folder
 * **Error Handling** is done through **Either**
@@ -45,7 +44,6 @@ This project probably doesn't need this overengineering, it is just an example o
 * **Flow**: Asynchronous data stream 
 * **Navigation Component**: Navigation between screens
 * **View Binding**: View binding
-* **Compose**: UI toolkit
 * **Coroutines**: Asynchronous programming
 * **Dagger Hilt**: Dependency Injection
 * **Moshi**: JSON parser for Kotlin
@@ -55,12 +53,8 @@ This project probably doesn't need this overengineering, it is just an example o
 
 ## TO DO:
 ### Improvements
-- Made all the ui with compose
-- Add more UI tests
+- Add more tests
 - Add more documentation and generate code documentation with dokka
-- Add a loader while the data is being retrieved
+- Add pagination
 - Add a CI to the repository
-- Cache breed images
-- Add search on the breeds list scene
-- Add refresh button on the breed random images
-- Make breed image bigger when tapping it
+- Cache all the repositories data

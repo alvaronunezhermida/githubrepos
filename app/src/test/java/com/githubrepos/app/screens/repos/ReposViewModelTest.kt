@@ -81,7 +81,7 @@ class ReposViewModelTest {
     }
 
     @Test
-    fun `Breeds are requested when viewmodel starts`() = runTest {
+    fun `Repos are requested when viewmodel starts`() = runTest {
         runCurrent()
         verify(loadAllReposUseCase).invoke()
     }
