@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Github Repos</string>
-    <string name="breed_images">Breed Images</string>
     <string name="default_error">Ups… Something is going wrong. Try again later</string>
     <string name="null_params_error">Ups… Some parameters were lost. Try again later</string>
     <string name="ok">OK</string>
