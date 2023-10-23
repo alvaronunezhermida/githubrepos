@@ -7,7 +7,6 @@ import com.githubrepos.usecases.CountStargazersUseCase
 import com.githubrepos.usecases.GetAllReposUseCase
 import com.githubrepos.usecases.LoadAllReposUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -50,23 +49,21 @@ class ReposViewModel @Inject constructor(
                     },
                     ifRight = { repos ->
                         repos.map { repoItem ->
-                            async {
-                                repoItem.stargazersUrl?.let { stargazersUrl ->
-                                    countStargazersUseCase(
-                                        CountStargazersUseCase.Params(
-                                            repoItem.id,
-                                            stargazersUrl
-                                        )
-                                    ).collect { response ->
-                                        response.fold(
-                                            ifLeft = { error ->
-                                                appNavigator.toError(error)
-                                            },
-                                            ifRight = { _ ->
-                                                //do nothing
-                                            }
-                                        )
-                                    }
+                            repoItem.stargazersUrl?.let { stargazersUrl ->
+                                countStargazersUseCase(
+                                    CountStargazersUseCase.Params(
+                                        repoItem.id,
+                                        stargazersUrl
+                                    )
+                                ).collect { response ->
+                                    response.fold(
+                                        ifLeft = { error ->
+                                            appNavigator.toError(error)
+                                        },
+                                        ifRight = { _ ->
+                                            //do nothing
+                                        }
+                                    )
                                 }
                             }
                             fullscreenLoaderMutableState.value = false
