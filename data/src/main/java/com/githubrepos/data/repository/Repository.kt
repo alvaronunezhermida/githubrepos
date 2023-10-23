@@ -49,7 +49,7 @@ class Repository @Inject constructor(
             if (localDataSource.isReposListEmpty()) {
                 val repos = remoteDataSource.getAllRepos()
                 repos.fold(
-                    ifLeft = { emit(Error.Unknown.left()) },
+                    ifLeft = { error -> emit(error.left()) },
                     ifRight = {
                         localDataSource.saveRepos(it)
                         emit(it.right())
@@ -64,10 +64,10 @@ class Repository @Inject constructor(
     fun countStargazers(repoId: Int, stargazersUrl: String): Flow<Either<Error, Empty>> = doRun {
         flow {
             remoteDataSource.countStargazers(stargazersUrl).fold(
-                ifLeft = { emit(Error.Unknown.left()) },
+                ifLeft = { error -> emit(error.left()) },
                 ifRight = { count ->
                     localDataSource.getRepo(repoId).fold(
-                        ifLeft = { emit(Error.Unknown.left()) },
+                        ifLeft = { error -> emit(error.left()) },
                         ifRight = {
                             localDataSource.updateRepo(it.copy(stargazersCount = count))
                             emit(Empty().right())
@@ -84,7 +84,7 @@ class Repository @Inject constructor(
                 ifLeft = { emit(Error.Unknown.left()) },
                 ifRight = { count ->
                     localDataSource.getRepo(repoId).fold(
-                        ifLeft = { emit(Error.Unknown.left()) },
+                        ifLeft = { error -> emit(error.left()) },
                         ifRight = {
                             localDataSource.updateRepo(it.copy(forksCount = count))
                             emit(count.right())
@@ -101,7 +101,7 @@ class Repository @Inject constructor(
                 ifLeft = { emit(Error.Unknown.left()) },
                 ifRight = { language ->
                     localDataSource.getRepo(repoId).fold(
-                        ifLeft = { emit(Error.Unknown.left()) },
+                        ifLeft = { error -> emit(error.left()) },
                         ifRight = {
                             localDataSource.updateRepo(it.copy(language = language))
                             emit(language.right())

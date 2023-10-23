@@ -15,7 +15,7 @@ class CountForksUseCase @Inject constructor(private val repository: Repository) 
     override fun run(params: Params?): Flow<Either<Error, Int>> = params?.run {
         repository.countForks(repoId = params.repoId, forksUrl = params.forksUrl)
     } ?: flow {
-        emit(Error.Unknown.left())
+        emit(Error.NullParams.left())
     }
 
 

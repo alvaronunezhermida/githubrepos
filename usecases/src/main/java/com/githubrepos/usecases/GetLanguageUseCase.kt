@@ -15,7 +15,7 @@ class GetLanguageUseCase @Inject constructor(private val repository: Repository)
     override fun run(params: Params?): Flow<Either<Error, String>> = params?.run {
         repository.getLanguage(repoId = params.repoId, languagesUrl = params.languagesUrl)
     } ?: flow {
-        emit(Error.Unknown.left())
+        emit(Error.NullParams.left())
     }
 
 
