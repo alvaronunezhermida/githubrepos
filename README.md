@@ -55,6 +55,7 @@ This project probably doesn't need this overengineering, it is just an example o
 ### Improvements
 - Add more tests
 - Add more documentation and generate code documentation with dokka
+- Add github login for get the authorization token through the github web flow authentication
 - Add pagination
 - Add a CI to the repository
 - Cache all the repositories data

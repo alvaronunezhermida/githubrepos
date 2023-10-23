@@ -49,7 +49,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBreedDao(db: Database) = db.repoDao()
+    fun provideRepoDao(db: Database) = db.repoDao()
 
     @Provides
     @Singleton
@@ -60,12 +60,21 @@ object AppModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = HttpLoggingInterceptor().run {
         level = HttpLoggingInterceptor.Level.BODY
-        OkHttpClient.Builder().addInterceptor(this).build()
+        OkHttpClient.Builder().addInterceptor(this).addInterceptor{
+            val request = it.request().newBuilder()
+                .removeHeader("Authorization")
+                .addHeader(
+                    "Authorization",
+                    String.format("Bearer %s", "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")
+                )
+                .build()
+            it.proceed(request)
+        }.build()
     }
 
     @Provides
     @Singleton
-    fun provideBreedsApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): GithubApi {
+    fun provideReposApi(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): GithubApi {
         return Retrofit.Builder()
             .baseUrl(apiUrl)
             .client(okHttpClient)
@@ -76,11 +85,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBreedsLocalDataSource(breedsRoomDataSource: RoomDataSource): LocalDataSource =
-        breedsRoomDataSource
+    fun provideReposLocalDataSource(roomDataSource: RoomDataSource): LocalDataSource =
+        roomDataSource
 
     @Provides
     @Singleton
-    fun provideBreedsRemoteDataSource(breedsClient: Client): RemoteDataSource =
-        breedsClient
+    fun provideReposRemoteDataSource(client: Client): RemoteDataSource =
+        client
 }
