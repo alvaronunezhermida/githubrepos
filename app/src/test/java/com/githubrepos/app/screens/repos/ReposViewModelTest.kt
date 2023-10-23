@@ -6,6 +6,7 @@ import com.githubrepos.app.navigation.AppNavigator
 import com.githubrepos.app.testcommons.CoroutinesTestRule
 import com.githubrepos.app.testcommons.sampleRepo
 import com.githubrepos.domain.Empty
+import com.githubrepos.usecases.CountStargazersUseCase
 import com.githubrepos.usecases.GetAllReposUseCase
 import com.githubrepos.usecases.LoadAllReposUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,22 +37,38 @@ class ReposViewModelTest {
     lateinit var loadAllReposUseCase: LoadAllReposUseCase
 
     @Mock
+    lateinit var countStargazersUseCase: CountStargazersUseCase
+
+    @Mock
     lateinit var appNavigator: AppNavigator
 
     private lateinit var vm: ReposViewModel
 
-    private val breeds = listOf(sampleRepo)
+    private val repos = listOf(sampleRepo)
 
     @Before
     fun setUp() {
-        whenever(getAllReposUseCase()).thenReturn(flowOf(breeds))
-        whenever(loadAllReposUseCase()).thenReturn(flowOf(Empty().right()))
-        vm = ReposViewModel(getAllReposUseCase, loadAllReposUseCase, appNavigator)
+        whenever(getAllReposUseCase()).thenReturn(flowOf(repos))
+        whenever(loadAllReposUseCase()).thenReturn(flowOf(repos.right()))
+        whenever(
+            countStargazersUseCase(
+                CountStargazersUseCase.Params(
+                    repos.first().id,
+                    repos.first().stargazersUrl ?: ""
+                )
+            )
+        ).thenReturn(flowOf(Empty().right()))
+        vm = ReposViewModel(
+            getAllReposUseCase,
+            loadAllReposUseCase,
+            countStargazersUseCase,
+            appNavigator
+        )
         vm.onStarted()
     }
 
     @Test
-    fun `Breeds are loaded from cache when viewmodel starts`() = runTest {
+    fun `Repos are loaded from cache when viewmodel starts`() = runTest {
         runCurrent()
         verify(getAllReposUseCase).invoke()
     }
@@ -59,7 +76,7 @@ class ReposViewModelTest {
     @Test
     fun `State is updated with current cached content immediately`() = runTest {
         vm.reposState.test {
-            assertEquals(breeds, awaitItem())
+            assertEquals(repos, awaitItem())
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
 import com.githubrepos.app.NavHostActivity
 import com.githubrepos.app.R
@@ -43,7 +44,7 @@ class MainInstrumentationTest {
 
     @Before
     fun setUp() {
-        mockWebServerRule.server.enqueue(MockResponse().fromJson("breeds.json"))
+        mockWebServerRule.server.enqueue(MockResponse().fromJson("repos.json"))
 
         hiltRule.inject()
 
@@ -54,13 +55,12 @@ class MainInstrumentationTest {
     }
 
     @Test
-    fun breeds_screen_is_displayed() {
+    fun reposs_screen_is_displayed() {
         onView(withId(R.id.reposAppBar)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun breeds_list_is_loaded() {
-        composeTestRule.onNodeWithText("Affenpinscher").assertIsDisplayed()
-        composeTestRule.onNodeWithText("American Terrier").assertIsDisplayed()
+    fun repos_list_is_loaded() {
+        onView(withText("grit")).check(matches(isDisplayed()))
     }
 }
