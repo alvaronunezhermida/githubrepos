@@ -47,8 +47,8 @@ class ErrorFragment : BaseDialog<FragmentErrorBinding, ErrorViewModel>() {
                 }
             }
 
-            ErrorEntry.NullParams,
-            ErrorEntry.Unknown -> getString(R.string.ok)
+            ErrorEntry.NullParams -> getString(R.string.null_params_error)
+            ErrorEntry.Unknown -> getString(R.string.default_error)
         }
     }
 

@@ -16,7 +16,7 @@ class CountStargazersUseCase @Inject constructor(private val repository: Reposit
     override fun run(params: Params?): Flow<Either<Error, Empty>> = params?.run {
         repository.countStargazers(repoId = params.repoId, stargazersUrl = params.stargazersUrl)
     } ?: flow {
-        emit(Error.Unknown.left())
+        emit(Error.NullParams.left())
     }
 
 
